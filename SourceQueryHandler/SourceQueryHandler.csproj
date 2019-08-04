@@ -61,10 +61,6 @@
     <Compile Include="ServerManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\git\QueryMaster\QueryMaster\QueryMaster.csproj">
-      <Project>{4ca9c894-518f-42d7-bbe2-cfdfe7a03f8a}</Project>
-      <Name>QueryMaster</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MongoDBHelper\MongoDBHelper.csproj">
       <Project>{36668676-1828-473E-AE5F-ECE71AEEE2BD}</Project>
       <Name>MongoDBHelper</Name>

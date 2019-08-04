@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>WPF.Themes</RootNamespace>
+    <TargetFramework>net40</TargetFramework>
+      <Company>Impilo Software</Company>
+      <Product>WPF.Themes</Product>
+      <Copyright>"Copyright © Impilo Software 2008"</Copyright>
+      <!--
+      <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      <FileVersion>1.0.0.0</FileVersion>
+      -->
+      <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>DotNetProjects.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Input\DotNetProjects.Input.Toolkit.csproj" />
+    <ProjectReference Include="..\Layout\DotNetProjects.Layout.Toolkit.csproj" />
+  </ItemGroup>
+</Project>

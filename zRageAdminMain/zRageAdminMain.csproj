@@ -431,14 +431,6 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\git\QueryMaster\QueryMaster\QueryMaster.csproj">
-      <Project>{4CA9C894-518F-42D7-BBE2-CFDFE7A03F8A}</Project>
-      <Name>QueryMaster</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\git\WpfToolkit\WpfToolkit\Input\DotNetProjects.Input.Toolkit.csproj">
-      <Project>{8457cc93-412b-4cc6-88b7-546637762d62}</Project>
-      <Name>DotNetProjects.Input.Toolkit</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MapHelper\MapHelper.csproj">
       <Project>{697A8D0E-6BAE-4D5C-8790-9B9769EC2408}</Project>
       <Name>MapHelper</Name>

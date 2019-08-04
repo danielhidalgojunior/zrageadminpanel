@@ -55,10 +55,6 @@
     <Compile Include="ToastMaker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\git\DesktopToast\DesktopToast\DesktopToast.csproj">
-      <Project>{B8D704D5-FB0C-4C2D-8189-72C6649BA157}</Project>
-      <Name>DesktopToast</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MongoDBHelper\MongoDBHelper.csproj">
       <Project>{36668676-1828-473E-AE5F-ECE71AEEE2BD}</Project>
       <Name>MongoDBHelper</Name>
