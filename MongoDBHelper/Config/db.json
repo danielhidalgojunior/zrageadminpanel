@@ -1,0 +1,5 @@
+{
+  "connectionStringRemote": "",
+  "connectionStringLocal": "mongodb://localhost:27017/zrageadmin",
+  "databaseName": "zrageadmin"
+}
