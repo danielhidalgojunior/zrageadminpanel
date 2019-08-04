@@ -65,6 +65,10 @@
       <Project>{36668676-1828-473E-AE5F-ECE71AEEE2BD}</Project>
       <Name>MongoDBHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QueryMaster\QueryMaster.csproj">
+      <Project>{4ca9c894-518f-42d7-bbe2-cfdfe7a03f8a}</Project>
+      <Name>QueryMaster</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StaticResources\StaticResources.csproj">
       <Project>{FD961AA6-B679-4EAC-9BDD-A8BC193C3080}</Project>
       <Name>StaticResources</Name>

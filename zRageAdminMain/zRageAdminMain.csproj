@@ -439,6 +439,10 @@
       <Project>{36668676-1828-473E-AE5F-ECE71AEEE2BD}</Project>
       <Name>MongoDBHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QueryMaster\QueryMaster.csproj">
+      <Project>{4ca9c894-518f-42d7-bbe2-cfdfe7a03f8a}</Project>
+      <Name>QueryMaster</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SourceQueryHandler\SourceQueryHandler.csproj">
       <Project>{8E1AD246-A377-408C-87C3-37D71A82D1AA}</Project>
       <Name>SourceQueryHandler</Name>
@@ -450,6 +454,10 @@
     <ProjectReference Include="..\ToastNoticesManager\ToastNoticesManager.csproj">
       <Project>{EC1DEC44-2830-4543-A378-0F2A5832C496}</Project>
       <Name>ToastNoticesManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfToolkit\Input\DotNetProjects.Input.Toolkit.csproj">
+      <Project>{5469ced6-b466-4db5-873c-26d511dfeffa}</Project>
+      <Name>DotNetProjects.Input.Toolkit</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
