@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:zRageAdminMain.ViewModels"
         xmlns:controls="clr-namespace:zRageAdminMain.Controls"
         xmlns:converters="clr-namespace:zRageAdminMain.ViewModels.Converters"
+        
         mc:Ignorable="d"
         Title="CS:GO Admin Tool" Height="600" Width="1300">
     <Window.Resources>
@@ -16,6 +17,7 @@
         <controls:ConditionalEventsControl x:Key="ConditionalEvents"/>
         <controls:PlayersBoardView x:Key="PlayersBoard"/>
         <controls:AdminSectionControl x:Key="AdminSectionControl"/>
+        <controls:MapsListingControl x:Key="MapsListingControl"/>
 
         <vm:MainViewModel x:Key="MainViewModel"/>
 
@@ -54,7 +56,8 @@
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Players"  Content="{StaticResource PlayersBoard}"/>
+                <TabItem Header="Players" Content="{StaticResource PlayersBoard}"/>
+                <TabItem Header="Maps" Content="{StaticResource MapsListingControl}"/>
                 <TabItem Header="Command scheduler"/>
                 <TabItem Header="Events Manager" IsEnabled="True" Content="{StaticResource ConditionalEvents}"/>
                 <TabItem Header="Admin" Visibility="{Binding User.GodMode, Converter={StaticResource PermissionLevelToAdminTabVisibility}}" Content="{StaticResource AdminSectionControl}"/>

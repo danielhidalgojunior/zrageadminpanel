@@ -41,8 +41,8 @@ namespace zRageAdminMain.ViewModels
 
         private async void UpdatePlayers(object sender, EventArgs e)
         {
-            var statusresponse = await (Variables.Server as ServerManager).SendCommand("status");
-            var players = Player.GetPlayersInfo((Variables.Server as ServerManager).Players, statusresponse);
+            var statusresponse = await ServerManager.SendCommand("status");
+            var players = Player.GetPlayersInfo(ServerManager.Players, statusresponse);
         }
     }
 }

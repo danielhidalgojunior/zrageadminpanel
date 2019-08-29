@@ -1,0 +1,18 @@
+{
+  "getMapsWithRcon": true,
+  "fastdlLinks": [
+    {
+      "name": "zRage",
+      "url": "http://fastdlus.streamline-servers.com/fastdl/henriquej/30860/maps"
+    },
+    {
+      "name": "GFL",
+      "url": ""
+    },
+    {
+      "name": "Mapeadores",
+      "url": ""
+    }
+  ],
+  "mapsDirectory": "E:\\games\\steamapps\\common\\Counter-Strike Global Offensive\\csgo\\maps"
+}

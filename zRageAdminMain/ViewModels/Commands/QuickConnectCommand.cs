@@ -27,7 +27,7 @@ namespace zRageAdminMain.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            Process.Start($"steam://connect/{(Variables.Server as ServerManager).Ip}:{(Variables.Server as ServerManager).Port}");
+            Process.Start($"steam://connect/{ServerManager.Ip}:{ServerManager.Port}");
         }
     }
 }

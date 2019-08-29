@@ -12,15 +12,15 @@ using System.Windows;
 
 namespace SourceQueryHandler
 {
-    public class ServerManager
+    public static class ServerManager
     {
         public static bool ThrowExceptions = false;
-        Server server { get; set; }
-        public string Ip { get; set; }
-        public ushort Port { get; set; }
-        public string RconPassword { get; set; }
+        static Server server { get; set; }
+        public static string Ip { get; set; }
+        public static ushort Port { get; set; }
+        public static string RconPassword { get; set; }
 
-        public ServerInfo Info
+        public static ServerInfo Info
         {
             get
             {
@@ -30,7 +30,7 @@ namespace SourceQueryHandler
                 }
             }
         }
-        public QueryMasterCollection<PlayerInfo> Players
+        public static QueryMasterCollection<PlayerInfo> Players
         {
             get
             {
@@ -41,7 +41,7 @@ namespace SourceQueryHandler
             }
         }
 
-        public QueryMasterCollection<Rule> Rules
+        public static QueryMasterCollection<Rule> Rules
         {
             get
             {
@@ -52,7 +52,7 @@ namespace SourceQueryHandler
             }
         }
 
-        public ServerManager(RconModel auth)
+        public static void Initialize(RconModel auth)
         {
             Ip = auth.Ip;
             Port = auth.Port;
@@ -64,12 +64,12 @@ namespace SourceQueryHandler
             Task.Run(() => Initialize());
         }
 
-        public async Task Initialize()
+        static async Task Initialize()
         {
             await SendCommand("status");
         }
 
-        public async Task<string> SendCommand(string command)
+        public static async Task<string> SendCommand(string command)
         {
             string response = null;
 
@@ -92,6 +92,6 @@ namespace SourceQueryHandler
             return response;
         }
 
-        public void DisposeServer() => server?.Dispose();
+        public static void DisposeServer() => server?.Dispose();
     }
 }

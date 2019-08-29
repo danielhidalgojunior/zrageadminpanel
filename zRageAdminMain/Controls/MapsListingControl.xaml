@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="zRageAdminMain.Controls.MapsListingControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:zRageAdminMain.ViewModels"
+             xmlns:converters="clr-namespace:zRageAdminMain.ViewModels.Converters"
+             xmlns:local="clr-namespace:zRageAdminMain.Controls"
+             mc:Ignorable="d" 
+             FontFamily="Open Sans"
+             d:DesignHeight="550" d:DesignWidth="800">
+    <UserControl.Resources>
+        <vm:MapsListingViewModel x:Key="MapsListingViewModel"/>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:BoolToVisibilityConverterReversed x:Key="BoolToVisibilityConverterReversed"/>
+        <converters:MapStateToVisibilityConverter x:Key="MapStateToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource MapsListingViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Search" Grid.Row="0"/>
+            <TextBox Text="{Binding MapSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Padding="8 2"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="8 4">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding Maps}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Visibility="{Binding Visible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}" BorderThickness="1" CornerRadius="3" BorderBrush="#3F000000" Margin="0 1">
+                                <Expander Padding="4 1" Margin="0 2 0 0" IsExpanded="False">
+                                    <Expander.Header>
+                                        <TextBlock Text="{Binding FullName}" FontSize="14" FontWeight="Medium" Margin="4 0 0 0" Foreground="#FF474747" RenderTransformOrigin="0.5,0.5"/>
+                                    </Expander.Header>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid Grid.Row="0">
+                                            <GroupBox Header="Avaliable files to download" Padding="2">
+                                                <Grid>
+                                                    <ItemsControl ItemsSource="{Binding DownloadableFiles}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding .}" Margin="0 1" Foreground="Gray"/>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </Grid>
+                                            </GroupBox>
+                                        </Grid>
+
+                                        <Grid Grid.Row="1" Margin="2 8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <ProgressBar Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 8 0" Visibility="{Binding State, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource MapStateToVisibilityConverter}}"/>
+                                            <Button Grid.Column="1" Content="Download" HorizontalAlignment="Right" Padding="8 4" Command="{Binding Source={StaticResource MapsListingViewModel}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Path=DownloadMapFilesCommand}" CommandParameter="{Binding .}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Expander>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

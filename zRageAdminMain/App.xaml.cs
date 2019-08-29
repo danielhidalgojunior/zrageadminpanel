@@ -1,5 +1,7 @@
-﻿using MongoDBHelper;
+﻿using JsonConfigurator;
+using MongoDBHelper;
 using MongoDBHelper.Models;
+using Newtonsoft.Json;
 using SourceQueryHandler;
 using StaticResources;
 using System;
@@ -21,10 +23,14 @@ namespace zRageAdminMain
     {
         public App()
         {
-            Mongo.Initialize(JsonConfigurator.GetConnectionStringByConfigFile("config/db.json"));
+            Mongo.Initialize(MongoDBHelper.JsonConfigurator.GetConnectionStringByConfigFile("config/db.json"));
 
             var auth = RconModel.GetOne("zRage");
-            Variables.Server = new ServerManager(auth);
+            ServerManager.Initialize(auth);
+
+            var settings = new JSettings();
+
+            Variables.Settings = settings.Load<Settings>();
         }
 
         public static Color GetHashColor(string text)

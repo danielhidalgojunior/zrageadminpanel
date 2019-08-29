@@ -46,10 +46,10 @@ namespace zRageAdminMain.ViewModels
 
         private void UpdateData(object sender, EventArgs e)
         {
-            if (Application.Current.MainWindow.WindowState == WindowState.Minimized)
+            if (Application.Current.MainWindow?.WindowState == null || Application.Current.MainWindow?.WindowState == WindowState.Minimized)
                 return;
 
-            var i = (Variables.Server as ServerManager).Info;
+            var i = ServerManager.Info;
 
             if (i != null)
             {

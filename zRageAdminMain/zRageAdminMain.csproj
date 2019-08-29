@@ -275,6 +275,9 @@
     <Compile Include="Controls\ConsoleControl.xaml.cs">
       <DependentUpon>ConsoleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MapsListingControl.xaml.cs">
+      <DependentUpon>MapsListingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NextMapControl.xaml.cs">
       <DependentUpon>NextMapControl.xaml</DependentUpon>
     </Compile>
@@ -304,6 +307,7 @@
     <Compile Include="ViewModels\Commands\CreateEventTriggerCommand.cs" />
     <Compile Include="ViewModels\Commands\DeleteEventTriggerCommand.cs" />
     <Compile Include="ViewModels\Commands\DownloadMapCommand.cs" />
+    <Compile Include="ViewModels\Commands\DownloadMapFilesCommand.cs" />
     <Compile Include="ViewModels\Commands\GetFastLoginDataCommand.cs" />
     <Compile Include="ViewModels\Commands\QuickConnectCommand.cs" />
     <Compile Include="ViewModels\Commands\SendCmdCommand.cs" />
@@ -311,7 +315,10 @@
     <Compile Include="ViewModels\ConditionalNoticesViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModel.cs" />
     <Compile Include="ViewModels\Converters\AdminSection\BoolToStringModeConverter.cs" />
+    <Compile Include="ViewModels\Converters\BoolToVisibilityConverterReversed.cs" />
+    <Compile Include="ViewModels\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="ViewModels\Converters\EventTypeToColorConverter.cs" />
+    <Compile Include="ViewModels\Converters\MapStateToVisibilityConverter.cs" />
     <Compile Include="ViewModels\Converters\NoticeTypeToColorConverter.cs" />
     <Compile Include="ViewModels\Converters\EventTypeToStringConverter.cs" />
     <Compile Include="ViewModels\Converters\NoticeTypeToStringConverter.cs" />
@@ -320,6 +327,7 @@
     <Compile Include="ViewModels\Converters\TimeLeftToStringOrMessageConverter.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MapsListingViewModel.cs" />
     <Compile Include="ViewModels\NextMapViewModel.cs" />
     <Compile Include="ViewModels\PlayersBoardViewModel.cs" />
     <Compile Include="ViewModels\ServerStatusViewModel.cs" />
@@ -351,6 +359,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Config\settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Config\fastlogin.json" />
     <None Include="FodyWeavers.xsd">
       <SubType>Designer</SubType>
@@ -387,6 +398,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ConsoleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MapsListingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -431,6 +446,14 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bz2Helper\Bz2Helper.csproj">
+      <Project>{A270A5D5-C459-4552-BF8F-11CC79B79CA2}</Project>
+      <Name>Bz2Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JsonConfigurator\JsonConfigurator.csproj">
+      <Project>{1204A990-996C-49D9-9B86-95745837425A}</Project>
+      <Name>JsonConfigurator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MapHelper\MapHelper.csproj">
       <Project>{697A8D0E-6BAE-4D5C-8790-9B9769EC2408}</Project>
       <Name>MapHelper</Name>

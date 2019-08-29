@@ -39,7 +39,7 @@ namespace zRageAdminMain.ViewModels.Commands
 
             var command = inputcontrol.Text;
 
-            var response = await (Variables.Server as ServerManager).SendCommand(command);
+            var response = await ServerManager.SendCommand(command);
 
             VM.Console.AppendText(Environment.NewLine + response);
             VM.Console.ScrollToEnd();

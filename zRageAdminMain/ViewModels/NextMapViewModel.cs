@@ -45,10 +45,10 @@ namespace zRageAdminMain.ViewModels
 
         private async void UpdateData(object sender, EventArgs eventArgs)
         {
-            var nMresponse = await (Variables.Server as ServerManager).SendCommand("nextmap");
+            var nMresponse = await ServerManager.SendCommand("nextmap");
             NextMap.Map = NextMap.ParseNextMapResponse(nMresponse);
 
-            var tlResponse = await (Variables.Server as ServerManager).SendCommand("timeleft");
+            var tlResponse = await ServerManager.SendCommand("timeleft");
             NextMap.TimeLeft = NextMap.ParseTimeLeftResponse(tlResponse);
         }
     }
