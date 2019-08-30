@@ -6,6 +6,7 @@
              xmlns:vm="clr-namespace:zRageAdminMain.ViewModels"
              xmlns:converters="clr-namespace:zRageAdminMain.ViewModels.Converters"
              xmlns:local="clr-namespace:zRageAdminMain.Controls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              FontFamily="Open Sans"
              d:DesignHeight="550" d:DesignWidth="800">
@@ -14,6 +15,9 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converters:BoolToVisibilityConverterReversed x:Key="BoolToVisibilityConverterReversed"/>
         <converters:MapStateToVisibilityConverter x:Key="MapStateToVisibilityConverter"/>
+        <converters:BooleanToMapContainerColorConverter x:Key="BooleanToMapContainerColorConverter"/>
+        <converters:BoolToRedOrGreenConverter x:Key="BoolToRedOrGreenConverter"/>
+        <converters:BytesToSizeStringConverter x:Key="BytesToSizeStringConverter"/>
     </UserControl.Resources>
     <Grid DataContext="{StaticResource MapsListingViewModel}">
         <Grid.RowDefinitions>
@@ -35,12 +39,23 @@
                 <ItemsControl ItemsSource="{Binding Maps}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Visibility="{Binding Visible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}" BorderThickness="1" CornerRadius="3" BorderBrush="#3F000000" Margin="0 1">
+                            <Border Visibility="{Binding Visible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}" BorderThickness="1.5" CornerRadius="3" BorderBrush="{Binding AlreadyDownloaded, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToMapContainerColorConverter}}" Margin="0 1">
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Set as next map"/>
+                                        <MenuItem Header="Set map"/>
+                                        <MenuItem Header="Add to nominate"/>
+                                    </ContextMenu>
+                                </Border.ContextMenu>
                                 <Expander Padding="4 1" Margin="0 2 0 0" IsExpanded="False">
                                     <Expander.Header>
-                                        <TextBlock Text="{Binding FullName}" FontSize="14" FontWeight="Medium" Margin="4 0 0 0" Foreground="#FF474747" RenderTransformOrigin="0.5,0.5"/>
+                                        <TextBlock Text="{Binding FullName}" Grid.Column="0" FontSize="14" FontWeight="Medium" Margin="4 0 0 0" Foreground="#FF474747" RenderTransformOrigin="0.5,0.5"/>
                                     </Expander.Header>
-
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Expanded">
+                                            <i:InvokeCommandAction Command="{Binding Source={StaticResource MapsListingViewModel}, Path=UpdateMapInfoCommand}" CommandParameter="{Binding .}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto"/>
@@ -53,7 +68,16 @@
                                                     <ItemsControl ItemsSource="{Binding DownloadableFiles}">
                                                         <ItemsControl.ItemTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock Text="{Binding .}" Margin="0 1" Foreground="Gray"/>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <TextBlock Grid.Column="0" Text="{Binding Name}" Margin="4 1 4 0" Foreground="Gray"/>
+                                                                    <TextBlock Grid.Column="1" Text="{Binding Size, Converter={StaticResource BytesToSizeStringConverter}}" FontWeight="Medium" Margin="4 1 4 0"/>
+                                                                    <Ellipse Grid.Column="2" Height="8" Width="8" Margin="4 1 4 0" Fill="{Binding Downloaded, Converter={StaticResource BoolToRedOrGreenConverter}}"/>
+                                                                </Grid>
                                                             </DataTemplate>
                                                         </ItemsControl.ItemTemplate>
                                                     </ItemsControl>
@@ -68,7 +92,7 @@
                                             </Grid.ColumnDefinitions>
 
                                             <ProgressBar Grid.Column="0" Minimum="0" Maximum="100" Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 8 0" Visibility="{Binding State, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource MapStateToVisibilityConverter}}"/>
-                                            <Button Grid.Column="1" Content="Download" HorizontalAlignment="Right" Padding="8 4" Command="{Binding Source={StaticResource MapsListingViewModel}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Path=DownloadMapFilesCommand}" CommandParameter="{Binding .}"/>
+                                            <Button Grid.Column="1" Style="{StaticResource ButtonDownloadMd}" Content="Download" HorizontalAlignment="Right" Padding="8 4" Command="{Binding Source={StaticResource MapsListingViewModel}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Path=DownloadMapFilesCommand}" CommandParameter="{Binding .}"/>
                                         </Grid>
                                     </Grid>
                                 </Expander>

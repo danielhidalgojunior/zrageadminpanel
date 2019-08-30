@@ -59,7 +59,7 @@ namespace zRageAdminMain.ViewModels.Commands
             {
                 var dh = new DownloadHandler(map, VM.Mh.Fastdl, VM.Mh.Settings.MapsDirectory);
                 dh.RegisterCallBack(VM.DecompressFiles);
-                dh.DownloadMany(map.DownloadableFiles);
+                dh.DownloadMany(map.DownloadableFiles.Select(x => x.Name));
             }
         }
     }

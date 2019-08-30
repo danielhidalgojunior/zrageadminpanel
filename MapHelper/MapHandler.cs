@@ -74,7 +74,7 @@ namespace MapHelper
             {
                 var mapobj = new Map();
                 mapobj.FullName = (string)map.Clone();
-                mapobj.DownloadableFiles = GetMapFilesByName(map).ToList();
+                mapobj.DownloadableFiles = GetMapFilesByName(map).Select(x => new MapFile { Name = x }).ToList();
 
                 if (files.Contains(map + ".bsp"))
                 {
@@ -86,6 +86,33 @@ namespace MapHelper
             }
 
             return auxmaps;
+        }
+
+        public Map GenerateMapByName(string map)
+        {
+            var files = DownloadedMaps;
+            var mapobj = new Map();
+
+            mapobj.FullName = (string)map.Clone();
+            mapobj.DownloadableFiles = GetMapFilesByName(map).Select(x => new MapFile { Name = x }).ToList();
+
+            if (files.Contains(map + ".bsp"))
+            {
+                mapobj.CanDownload = true;
+                mapobj.AlreadyDownloaded = true;
+            }
+
+            return mapobj;
+        }
+
+        public bool MapFileExists(string file)
+        {
+            return File.Exists(Path.Combine(Settings.MapsDirectory, file));
+        }
+
+        public bool MapFileExists(MapFile file)
+        {
+            return File.Exists(Path.Combine(Settings.MapsDirectory, file.Name.Replace(".bz2", "")));
         }
 
         public IEnumerable<string> GetMapFilesFromMapsDirectory()
@@ -102,7 +129,14 @@ namespace MapHelper
         {
             var fileFormat = IsBz2 ? ".bsp.bz2" : ".bsp";
 
-            return string.Concat(CombineUri(Fastdl, map), fileFormat);
+            if (map.Contains(".bsp") || map.Contains(".bz2"))
+            {
+                return CombineUri(Fastdl, map);
+            }
+            else
+            {
+                return string.Concat(CombineUri(Fastdl, map), fileFormat);
+            }
         }
 
         public static string CombineUri(params string[] uriParts)
@@ -120,26 +154,34 @@ namespace MapHelper
             return uri;
         }
 
-        public static string GetMapNameWithoutExtensions(string map)
-        {
-            return map.Replace(".bsp.bz2", "").Replace(".bsp", "");
-        }
-
-        public string GetMapSize(Map map)
+        public long GetSize(Map map)
         {
             return GetFileSize(GetMapUrl(map.FullName));
         }
 
-        public static string GetFileSize(string remotefile)
+        public long GetSize(MapFile mapfile)
         {
-            var webRequest = WebRequest.Create(remotefile);
-            webRequest.Method = "HEAD";
+            return GetFileSize(GetMapUrl(mapfile.Name));
+        }
 
-            using (var webResponse = webRequest.GetResponse())
+        public static long GetFileSize(string remotefile)
+        {
+            try
             {
-                var fileSize = webResponse.Headers.Get("Content-Length");
-                var fileSizeInBytes = Convert.ToInt32(fileSize);
-                return BytesToString(fileSizeInBytes);
+                var webRequest = WebRequest.Create(remotefile);
+                webRequest.Method = "HEAD";
+
+                using (var webResponse = webRequest.GetResponse())
+                {
+                    var fileSize = webResponse.Headers.Get("Content-Length");
+                    var fileSizeInBytes = Convert.ToInt32(fileSize);
+                    return fileSizeInBytes;
+                }
+            }
+            catch (Exception)
+            {
+
+                return -1;
             }
         }
 

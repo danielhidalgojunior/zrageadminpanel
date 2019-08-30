@@ -312,11 +312,15 @@
     <Compile Include="ViewModels\Commands\QuickConnectCommand.cs" />
     <Compile Include="ViewModels\Commands\SendCmdCommand.cs" />
     <Compile Include="ViewModels\Commands\TryLoginCommand.cs" />
+    <Compile Include="ViewModels\Commands\UpdateMapInfoCommand.cs" />
     <Compile Include="ViewModels\ConditionalNoticesViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModel.cs" />
     <Compile Include="ViewModels\Converters\AdminSection\BoolToStringModeConverter.cs" />
+    <Compile Include="ViewModels\Converters\BooleanToMapContainerColorConverter.cs" />
+    <Compile Include="ViewModels\Converters\BoolToRedOrGreenConverter.cs" />
     <Compile Include="ViewModels\Converters\BoolToVisibilityConverterReversed.cs" />
     <Compile Include="ViewModels\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\Converters\BytesToSizeStringConverter.cs" />
     <Compile Include="ViewModels\Converters\EventTypeToColorConverter.cs" />
     <Compile Include="ViewModels\Converters\MapStateToVisibilityConverter.cs" />
     <Compile Include="ViewModels\Converters\NoticeTypeToColorConverter.cs" />

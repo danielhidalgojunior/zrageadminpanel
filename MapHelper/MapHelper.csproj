@@ -58,6 +58,7 @@
     <Compile Include="MapHandler.cs" />
     <Compile Include="MapHandlerSettings.cs" />
     <Compile Include="Models\Map.cs" />
+    <Compile Include="Models\MapFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

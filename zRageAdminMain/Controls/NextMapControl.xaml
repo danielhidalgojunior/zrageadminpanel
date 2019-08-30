@@ -11,6 +11,7 @@
     <UserControl.Resources>
         <vm:NextMapViewModel x:Key="vm"/>
         <converters:TimeLeftToStringOrMessageConverter x:Key="TimeLeftToStringOrMessageConverter"/>
+        <converters:MapStateToVisibilityConverter x:Key="MapStateToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid Margin="8" DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
@@ -39,7 +40,13 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <Button Content="Download" Style="{StaticResource ButtonDownloadMd}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Content="Download" Grid.Row="0" Command="{Binding DownloadMapCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding NextMap}" Style="{StaticResource ButtonDownloadMd}"/>
+            <ProgressBar Grid.Row="1" Minimum="0" Maximum="100" Value="{Binding MapInfo.Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 8 0" Visibility="{Binding MapInfo.State, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource MapStateToVisibilityConverter}}"/>
+
         </Grid>
     </Grid>
 </UserControl>
