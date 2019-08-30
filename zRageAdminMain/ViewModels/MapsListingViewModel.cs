@@ -36,11 +36,13 @@ namespace zRageAdminMain.ViewModels
 
         public DownloadMapFilesCommand DownloadMapFilesCommand { get; set; }
         public UpdateMapInfoCommand UpdateMapInfoCommand { get; set; }
+        public SendDynamicCmdCommand SendDynamicCmdCommand { get; set; }
 
         public MapsListingViewModel()
         {
             DownloadMapFilesCommand = new DownloadMapFilesCommand(this);
             UpdateMapInfoCommand = new UpdateMapInfoCommand(this);
+            SendDynamicCmdCommand = new SendDynamicCmdCommand();
 
             Maps = new ObservableCollection<Map>();
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
@@ -52,9 +54,9 @@ namespace zRageAdminMain.ViewModels
                     AlreadyDownloaded = true,
                     DownloadableFiles = new List<MapFile>
                     {
-                        new MapFile{ Name = "url1", Size = 535345 },
-                        new MapFile{ Name = "url1", Size = 535345 },
-                        new MapFile{ Name = "url1", Size = 535345 }
+                        new MapFile { Name = "url1", Size = 535345 },
+                        new MapFile { Name = "url1", Size = 535345 },
+                        new MapFile { Name = "url1", Size = 535345 }
                     }
                 });
 

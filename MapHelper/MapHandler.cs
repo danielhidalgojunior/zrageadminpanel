@@ -185,29 +185,6 @@ namespace MapHelper
             }
         }
 
-        private IEnumerable<string> OnlyMaps(IEnumerable<string> list, string prefix = null)
-        {
-            List<string> aux = new List<string>();
-
-            foreach (var map in list)
-            {
-                if (map.EndsWith(".bsp.bz2") || map.EndsWith(".bsp"))
-                {
-                    if (prefix != null)
-                    {
-                        if (map.StartsWith(prefix))
-                            aux.Add(map);
-                    }
-                    else
-                        aux.Add(map);
-                }
-                else
-                    continue;
-            }
-
-            return aux;
-        }
-
         public static string GetGameModeByName(string mapname)
         {
             return mapname.Split('_')[0].ToUpper();

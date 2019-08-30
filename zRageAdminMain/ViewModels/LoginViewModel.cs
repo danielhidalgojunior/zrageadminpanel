@@ -30,9 +30,9 @@ namespace zRageAdminMain.ViewModels
             if (user != null)
             {
                 user.LastLogin = DateTime.Now;
-                UserModel.UpdateOne(user);
-
                 Variables.LoggedUser = user;
+
+                UserModel.UpdateOne(user);
             }
 
             return user != null;

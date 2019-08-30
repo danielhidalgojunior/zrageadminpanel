@@ -2,6 +2,7 @@
 using SourceQueryHandler;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -17,30 +18,42 @@ namespace zRageAdminMain.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public string Command { get; set; }
-        public List<CommandInfoModel> AllCommands { get; set; }
+        public ObservableCollection<CommandInfoModel> AllCommands { get; set; }
         public RichTextBox Console { get; set; }
         public SendCmdCommand SendCmdCommand { get; set; }
         public AttachConsoleCommand AttachConsoleCommand { get; set; }
+        public UpdateCommandListingCommand UpdateCommandListingCommand { get; set; }
         public ConsoleViewModel()
         {
-            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-                return;
+            AllCommands = new ObservableCollection<CommandInfoModel>();
 
             AttachConsoleCommand = new AttachConsoleCommand(this);
             SendCmdCommand = new SendCmdCommand(this);
+            UpdateCommandListingCommand = new UpdateCommandListingCommand(this);
+
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return;
+
 
             LoadCommands();
         }
 
         public void LoadCommands()
         {
-            AllCommands = new List<CommandInfoModel>
+            var commands = CommandInfoModel.GetAll();
+
+            Application.Current.Dispatcher.Invoke(delegate
             {
-                new CommandInfoModel { Command = "sm_ban", Description = "bans player" },
-                new CommandInfoModel { Command = "sm_kick", Description = "kicks player" },
-                new CommandInfoModel { Command = "sm_slap", Description = "slaps player" },
-                new CommandInfoModel { Command = "sm_mute", Description = "mute player" }
-            };
+                AllCommands.Clear();
+            });
+            
+            foreach (var command in commands)
+            {
+                Application.Current.Dispatcher.Invoke(delegate
+                {
+                    AllCommands.Add(command);
+                });
+            }
         }
     }
 }

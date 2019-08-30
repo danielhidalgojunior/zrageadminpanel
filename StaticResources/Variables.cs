@@ -8,6 +8,7 @@ namespace StaticResources
 {
     public static class Variables
     {
+        public static bool CommandAddedOrUpdated { get; set; }
         public static object LoggedUser { get; set; }
         public static string NextMap { get; set; }
         public static string Map { get; set; }

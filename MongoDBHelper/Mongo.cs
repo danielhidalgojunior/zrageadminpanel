@@ -7,6 +7,7 @@ using MongoDB;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDBHelper.Models;
+using StaticResources;
 
 namespace MongoDBHelper
 {
@@ -55,6 +56,7 @@ namespace MongoDBHelper
 
         public static void InsertOne<T>(T entity) where T : Entity
         {
+            entity.CreatedByUser = (Variables.LoggedUser as UserModel).Name;
             entity.CreatedDate = DateTime.Now;
             GetCollection<T>().InsertOneAsync(entity).Wait();
         }
@@ -62,7 +64,10 @@ namespace MongoDBHelper
         public static void InsertMany<T>(params T[] entities) where T : Entity
         {
             foreach (var ent in entities)
+            {
+                ent.CreatedByUser = (Variables.LoggedUser as UserModel).Name;
                 ent.CreatedDate = DateTime.Now;
+            }
 
             GetCollection<T>().InsertManyAsync(entities).Wait();
         }
@@ -97,12 +102,18 @@ namespace MongoDBHelper
 
         public static void UpdateOne<T>(FilterDefinition<T> filter, T entity) where T : Entity
         {
+            entity.LastModifiedByUser = (Variables.LoggedUser as UserModel).Name;
+            entity.CreatedByUser = (Variables.LoggedUser as UserModel).Name;
+            entity.ModifiedDate = DateTime.Now;
             var options = new UpdateOptions { IsUpsert = true };
             GetCollection<T>().ReplaceOneAsync(filter, entity, options).Wait();
         }
 
         public static void UpdateOne<T>(T entity) where T : Entity
         {
+            entity.LastModifiedByUser = (Variables.LoggedUser as UserModel).Name;
+            entity.CreatedByUser = (Variables.LoggedUser as UserModel).Name;
+            entity.ModifiedDate = DateTime.Now;
             var options = new UpdateOptions { IsUpsert = true };
             var filter = Builders<T>.Filter.Eq(x => x.Id, entity.Id);
             GetCollection<T>().ReplaceOneAsync(filter, entity, options).Wait();

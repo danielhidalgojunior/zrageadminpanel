@@ -21,9 +21,10 @@ namespace zRageAdminMain.ViewModels.Converters.AdminSection
 
             if (vm is AdminUsersViewModel)
                 return (bool)value ? $"Editing user <{vm.DisplayedUser.Name}> of id: {vm.DisplayedUser.Id}" : "Insert mode";
+            else if (vm is AdminCommandsHelperViewModel)
+                return (bool)value ? $"Editing command <{vm.DisplayedCommand.Command}> of id: {vm.DisplayedCommand.Id}" : "Insert mode";
             else
                 return (bool)value ? $"Editing group <{vm.DisplayedGroup.GroupName}> of id: {vm.DisplayedGroup.Id}" : "Insert mode";
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

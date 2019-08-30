@@ -12,6 +12,7 @@
         <controls:AdminGeneralControl x:Key="AdminGeneralControl"/>
         <controls:AdminPermissionGroupsControl x:Key="AdminPermissionGroupsControl"/>
         <controls:AdminUsersControl x:Key="AdminUsersControl"/>
+        <controls:AdminCommandsHelperControl x:Key="AdminCommandsHelperControl"/>
     </UserControl.Resources>
     <Grid Margin="8">
         <TabControl TabStripPlacement="Left">
@@ -24,6 +25,7 @@
             <TabItem Header="General" Content="{StaticResource AdminGeneralControl}"/>
             <TabItem Header="Permission groups" Content="{StaticResource AdminPermissionGroupsControl}"/>
             <TabItem Header="Users" Content="{StaticResource AdminUsersControl}"/>
+            <TabItem Header="Commands helper" Content="{StaticResource AdminCommandsHelperControl}"/>
         </TabControl>
     </Grid>
 </UserControl>

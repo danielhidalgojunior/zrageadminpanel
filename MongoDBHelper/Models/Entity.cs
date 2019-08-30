@@ -14,5 +14,8 @@ namespace MongoDBHelper.Models
         [BsonId]
         public ObjectId Id { set; get; } = ObjectId.GenerateNewId();
         public DateTime? CreatedDate { get; set; }
+        public string CreatedByUser { get; set; }
+        public string LastModifiedByUser { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

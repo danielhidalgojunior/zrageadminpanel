@@ -59,6 +59,11 @@ namespace MongoDBHelper.Models
             var filter = Builders<EventTriggerModel>.Filter.Eq(x => x.Id, Id);
             var update = Builders<EventTriggerModel>.Update.Set(x => x.Enabled, false);
 
+            // preguiça de botar no method do mongo, vai aqui mesmo por enquanto
+            LastModifiedByUser = (Variables.LoggedUser as UserModel).Name;
+            CreatedByUser = (Variables.LoggedUser as UserModel).Name;
+            ModifiedDate = DateTime.Now;
+
             return Mongo.UpdateField(filter, update);
         }
     }

@@ -40,6 +40,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
@@ -260,6 +263,9 @@
     <Compile Include="Controls\AdminSectionControl.xaml.cs">
       <DependentUpon>AdminSectionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdminSection\AdminCommandsHelperControl.xaml.cs">
+      <DependentUpon>AdminCommandsHelperControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AdminSection\AdminGeneralControl.xaml.cs">
       <DependentUpon>AdminGeneralControl.xaml</DependentUpon>
     </Compile>
@@ -289,19 +295,25 @@
     </Compile>
     <Compile Include="Enumerators.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="ViewModels\AdminSection\AdminCommandsHelperViewModel.cs" />
     <Compile Include="ViewModels\AdminSection\AdminGeneralViewModel.cs" />
     <Compile Include="ViewModels\AdminSection\AdminPermissionGroupsViewModel.cs" />
     <Compile Include="ViewModels\AdminSection\AdminUsersViewModel.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\AddSelectedUserGroupCommand.cs" />
+    <Compile Include="ViewModels\Commands\AdminSection\CancelAndClearCommandActionCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\CancelAndClearGroupActionCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\CancelAndClearUserActionCommand.cs" />
+    <Compile Include="ViewModels\Commands\AdminSection\CreateNewOrEditExistingCommandCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\CreateNewOrEditExistingGroupCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\CreateNewOrEditExistingUserCommand.cs" />
+    <Compile Include="ViewModels\Commands\AdminSection\LoadCommandForEditionCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\LoadGroupForEditionCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\LoadUserForEditionCommand.cs" />
+    <Compile Include="ViewModels\Commands\AdminSection\RemoveCommandCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\RemoveSelectedUserGroupCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\RemoveGroupCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\RemoveUserCommand.cs" />
+    <Compile Include="ViewModels\Commands\AdminSection\UpdateAvaliableCommandsCommand.cs" />
     <Compile Include="ViewModels\Commands\AdminSection\UpdateAvaliableGroupsCommand.cs" />
     <Compile Include="ViewModels\Commands\AttachConsoleCommand.cs" />
     <Compile Include="ViewModels\Commands\CreateEventTriggerCommand.cs" />
@@ -311,7 +323,9 @@
     <Compile Include="ViewModels\Commands\GetFastLoginDataCommand.cs" />
     <Compile Include="ViewModels\Commands\QuickConnectCommand.cs" />
     <Compile Include="ViewModels\Commands\SendCmdCommand.cs" />
+    <Compile Include="ViewModels\Commands\SendDynamicCmdCommand.cs" />
     <Compile Include="ViewModels\Commands\TryLoginCommand.cs" />
+    <Compile Include="ViewModels\Commands\UpdateCommandListingCommand.cs" />
     <Compile Include="ViewModels\Commands\UpdateMapInfoCommand.cs" />
     <Compile Include="ViewModels\ConditionalNoticesViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModel.cs" />
@@ -323,6 +337,7 @@
     <Compile Include="ViewModels\Converters\BytesToSizeStringConverter.cs" />
     <Compile Include="ViewModels\Converters\EventTypeToColorConverter.cs" />
     <Compile Include="ViewModels\Converters\MapStateToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\Converters\MultiCommandParserConverter.cs" />
     <Compile Include="ViewModels\Converters\NoticeTypeToColorConverter.cs" />
     <Compile Include="ViewModels\Converters\EventTypeToStringConverter.cs" />
     <Compile Include="ViewModels\Converters\NoticeTypeToStringConverter.cs" />
@@ -363,6 +378,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="Config\settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -382,6 +398,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Controls\AdminSectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AdminSection\AdminCommandsHelperControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

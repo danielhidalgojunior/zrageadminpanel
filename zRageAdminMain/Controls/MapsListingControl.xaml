@@ -18,6 +18,7 @@
         <converters:BooleanToMapContainerColorConverter x:Key="BooleanToMapContainerColorConverter"/>
         <converters:BoolToRedOrGreenConverter x:Key="BoolToRedOrGreenConverter"/>
         <converters:BytesToSizeStringConverter x:Key="BytesToSizeStringConverter"/>
+        <converters:MultiCommandParserConverter x:Key="MultiCommandParserConverter"/>
     </UserControl.Resources>
     <Grid DataContext="{StaticResource MapsListingViewModel}">
         <Grid.RowDefinitions>
@@ -42,9 +43,30 @@
                             <Border Visibility="{Binding Visible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}" BorderThickness="1.5" CornerRadius="3" BorderBrush="{Binding AlreadyDownloaded, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToMapContainerColorConverter}}" Margin="0 1">
                                 <Border.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="Set as next map"/>
-                                        <MenuItem Header="Set map"/>
-                                        <MenuItem Header="Add to nominate"/>
+                                        <MenuItem Tag="sm_setnextmap" Header="Set as next map" Command="{Binding Source={StaticResource MapsListingViewModel}, Path=SendDynamicCmdCommand}">
+                                            <MenuItem.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource MultiCommandParserConverter}">
+                                                    <Binding Path="."/>
+                                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}"/>
+                                                </MultiBinding>
+                                            </MenuItem.CommandParameter>
+                                        </MenuItem>
+                                        <MenuItem Tag="sm_map" Header="Set map">
+                                            <MenuItem.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource MultiCommandParserConverter}">
+                                                    <Binding Path="."/>
+                                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}"/>
+                                                </MultiBinding>
+                                            </MenuItem.CommandParameter>
+                                        </MenuItem>
+                                        <MenuItem Tag="sm_nominate_addmap" Header="Add to nominate">
+                                            <MenuItem.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource MultiCommandParserConverter}">
+                                                    <Binding Path="."/>
+                                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}"/>
+                                                </MultiBinding>
+                                            </MenuItem.CommandParameter>
+                                        </MenuItem>
                                     </ContextMenu>
                                 </Border.ContextMenu>
                                 <Expander Padding="4 1" Margin="0 2 0 0" IsExpanded="False">

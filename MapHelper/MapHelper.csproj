@@ -54,7 +54,6 @@
     <Compile Include="DownloadHandler.cs" />
     <Compile Include="Enumerators.cs" />
     <Compile Include="HtmlFileParser.cs" />
-    <Compile Include="IProgress.cs" />
     <Compile Include="MapHandler.cs" />
     <Compile Include="MapHandlerSettings.cs" />
     <Compile Include="Models\Map.cs" />

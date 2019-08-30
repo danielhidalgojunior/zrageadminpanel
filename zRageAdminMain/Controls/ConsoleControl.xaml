@@ -44,6 +44,11 @@
 
             <Grid Grid.Column="0" Margin="4">
                 <toolkit:AutoCompleteBox x:Name="acConsoleInput" ItemsSource="{Binding AllCommands}" ValueMemberPath="Command" MinimumPrefixLength="2" FilterMode="Contains" FontFamily="Consolas" FontSize="12" VerticalContentAlignment="Center">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding UpdateCommandListingCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <toolkit:AutoCompleteBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding SendCmdCommand}" CommandParameter="{Binding ElementName=acConsoleInput}"/>
                     </toolkit:AutoCompleteBox.InputBindings>
